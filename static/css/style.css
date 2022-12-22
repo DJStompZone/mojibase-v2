@@ -1,0 +1,255 @@
+@charset utf-8;
+
+html {
+  
+}
+
+#backdrop {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 110vw;
+  height: 110vh;
+  left: -10px;
+  top: -10px;
+  z-index: 1;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    328deg,
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 59, 10, 1) 32%,
+    rgba(3, 74, 46, 1) 42%,
+    rgba(2, 63, 1, 1) 51%,
+    rgba(1, 45, 1, 1) 68%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  filter: blur(3px);
+}
+
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+ body {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+  width: calc(100%);
+  align-items: center;
+}
+
+/* ---- Snackbar toast ---- */
+
+#snackbar,
+#wackbar {
+  opacity: 0;
+  font-size: large;
+  background-color: #2cad00;
+  border: 2px solid #121;
+/*   border-color: hsla(0, 0, 0, 0.7); */
+  border-radius: 0.3em;
+  box-shadow: 0.12em 0.15em black;
+  color: #fff;
+  padding: 0.8em;
+  position: fixed;
+  text-align: center;
+/*   visibility: hidden; */
+  top: calc(100vh - 100px);
+  z-index: 1000;
+  text-shadow: 1px 1px 2px #111;
+  height: fit-content;
+}
+
+#snackbar.show {
+  animation: fadeinout 3.0s normal forwards;
+  -webkit-animation: fadeinout 3.0s normal forwards;
+/*   visibility: visible; */
+}
+
+#wackbar.show {
+  animation: fadeinout 3.0s normal forwards;
+  -webkit-animation: fadeinout 3.0s normal forwards;
+/*   visibility: visible; */
+}
+
+/* Animations to fade the snackbar in and out */
+
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  background-color: #00af40;
+  }
+  50% {
+    opacity: 0.9;
+  background-color: #e0ff25;
+  }
+  100% {
+    opacity: 0;
+    background-color: #ffef00;
+  }
+}
+.grid {
+  overflow-x: hidden;
+  width: 100%;
+  left: 0.75vw;
+}
+
+/* clear fix */
+.grid:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+/* ---- .grid-item ---- */
+.emoji-label {
+  display: none;
+  text-align: center;
+}
+
+.grid-item {
+  background: #0d8;
+  border: 2px solid #333;
+  border-color: hsla(0, 0, 0, 0.7);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 12vw;
+  width: 12vw;
+  z-index: 100;
+  align-items: center;
+  transition-duration: 0;
+  transitionDuration: 0;
+}
+
+.grid-item:not(.gigante) img {
+  max-height: 128px;
+  max-width: 128px;
+  overflow: hidden;
+/*   width: 85%; */
+  z-index: 50;
+  height: 89%;
+  width: 89%;
+  
+}
+
+.grid-item:not(.gigante) img:hover {
+  max-height: 132px;
+  max-width: 132px;
+  height: 85%;
+  width: 85%;
+}
+
+.label-show {
+  display: block;
+}
+
+.label-hide {
+  display: none;
+}
+
+.grid-item--width2 {
+  width: 200%;
+}
+
+.grid-item--height2 {
+  height: 200%;
+}
+
+.grid-item:hover {
+  background: #8cf;
+  border: 1px solid #333;
+  cursor: pointer;
+  
+/*   transitionduration: "0.8s"; */
+}
+
+.grid-item.gigante p {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vw;
+  height: 4vw;
+  font-family: monospace;
+  font-size: 1.5vw;
+  font-weight: 700;
+/*   margin-bottom: 0.5rem; */
+/*   overflow: hidden; */
+  opacity: 1.0;
+/*   width: 90%; */
+/*   margin-bottom: 0.5rem; */
+}
+
+.grid-item.gigante {
+  background: #f80;
+  height: 24vw;
+  overflow: hidden;
+  width: 24vw;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.grid-item.gigante .emoji-img {
+    max-height: 128px;
+    max-width: 128px;
+    height: 12vw;
+    width: 12vw;
+    overflow: hidden;
+/*     width: 14vw; */
+}
+.grid-item.gigante .emoji-img:hover {
+    
+  max-height: 130px;
+  max-width: 130px;
+  height: 13vw;
+  width: 13vw;
+}
+#moji-options {
+  overflow: hidden;
+  padding: 0.125rem;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 9vw;
+  gap: 0.5vw;
+  width: 100%;
+}
+
+.clip-btn {
+    transition: all 0.5s;
+    background-color: forestgreen;
+    padding: 0.2vw 0.5vw 0.3vw;
+    overflow: hidden;
+    font-size: 1.3vw;
+    font-family: monospace;
+    border-radius: 0.5rem;
+    border: 0.1vw solid black;
+    max-height: 2vw;
+    min-width: fit-content;
+}
+.btn-active {
+  background-color: #1d0;
+  border-color: gold;
+}
+.clip-btn:hover {
+  background-color: #8cf;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+body #moji-options {
+  display: none;
+  opacity: 0;
+}
+
+div #moji-options {
+    opacity: 1;
+    display: flex;
+    margin-bottom: 0.25vw;
+}

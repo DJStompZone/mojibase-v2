@@ -1,0 +1,14 @@
+.env
+CSZE/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+packpicz/
+scrap/
+.config/
+.cache/
+.upm/
+.breakpoints
+node_modules/
+venv/

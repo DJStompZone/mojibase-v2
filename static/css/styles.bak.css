@@ -1,0 +1,209 @@
+@charset utf-8;
+
+html {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    328deg,
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 59, 10, 1) 32%,
+    rgba(3, 74, 46, 1) 42%,
+    rgba(2, 63, 1, 1) 51%,
+    rgba(1, 45, 1, 1) 68%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+* {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+ body {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+  width: calc(100%);
+  align-items: center;
+}
+
+/* ---- Snackbar toast ---- */
+
+#snackbar,
+#wackbar {
+  opacity: 0;
+  font-size: large;
+  background-color: #2cad00;
+  border: 2px solid #121;
+/*   border-color: hsla(0, 0, 0, 0.7); */
+  border-radius: 0.3em;
+  box-shadow: 0.12em 0.15em black;
+  color: #fff;
+  padding: 0.8em;
+  position: fixed;
+  text-align: center;
+/*   visibility: hidden; */
+  top: calc(100vh - 100px);
+  z-index: 1000;
+  text-shadow: 1px 1px 2px #111;
+  height: fit-content;
+}
+
+#snackbar.show {
+  animation: fadeinout 3.0s normal forwards;
+  -webkit-animation: fadeinout 3.0s normal forwards;
+/*   visibility: visible; */
+}
+
+#wackbar.show {
+  animation: fadeinout 3.0s normal forwards;
+  -webkit-animation: fadeinout 3.0s normal forwards;
+/*   visibility: visible; */
+}
+
+/* Animations to fade the snackbar in and out */
+
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  background-color: #00af40;
+  }
+  50% {
+    opacity: 0.9;
+  background-color: #e0ff25;
+  }
+  100% {
+    opacity: 0;
+    background-color: #ffef00;
+  }
+}
+.grid, .seach-container {
+  overflow-x: hidden;
+  width: 100%;
+  left: 0.75vw;
+}
+
+/* clear fix */
+.grid:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+/* ---- .grid-item ---- */
+.emoji-label {
+  display: none;
+  text-align: center;
+}
+
+.grid-item {
+  background: #0d8;
+  border: 2px solid #333;
+  border-color: hsla(0, 0, 0, 0.7);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 12vw;
+  width: 12vw;
+  z-index: 100;
+  align-items: center;
+  transition-duration: 0;
+  transitionDuration: 0;
+}
+
+.grid-item img {
+  height: 85%;
+  margin: auto;
+  max-height: 85%;
+  max-width: 85%;
+  overflow: hidden;
+  width: 85%;
+  z-index: 50;
+}
+
+.grid-item img:hover {
+  height: 92%;
+  max-height: 92%;
+  max-width: 92%;
+  width: 92%;
+}
+
+.label-show {
+  display: block;
+}
+
+.label-hide {
+  display: none;
+}
+
+.grid-item--width2 {
+  width: 200%;
+}
+
+.grid-item--height2 {
+  height: 200%;
+}
+
+.grid-item:hover {
+  background: #8cf;
+  border: 1px solid #333;
+  cursor: pointer;
+  filter: contrast(1.1);
+/*   transitionduration: "0.8s"; */
+}
+
+.grid-item.gigante p {
+  display: block;
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 5%;
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+}
+
+.grid-item.gigante {
+  background: #f80;
+  height: 24vw;
+  overflow: hidden;
+  width:24vw;
+  transitionDuration: 0;
+  transition-duration: 0;
+}
+
+#moji-options {
+  overflow: hidden;
+  padding: 0.125rem;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.clip-btn {
+    background-color: forestgreen;
+    padding: 0.25rem 0.5rem 0.4rem;
+    overflow: hidden;
+    font-size: 0.6rem;
+    font-family: monospace;
+    border-radius: 0.5rem;
+    border: 0.05rem solid black;
+    max-height: 1.25rem;
+    min-width: fit-content;
+}
+
+body #moji-options {
+  display: none;
+  opacity: 0;
+}
+
+div #moji-options {
+    opacity: 1;
+    display: flex;
+}
