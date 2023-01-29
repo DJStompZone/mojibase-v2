@@ -4,128 +4,116 @@
     <meta charset="utf-8" />
     <title>DJ's Mojibase [Tectonix]</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="og:title" content="DJ's Mojibase v2" />
+    <meta name="og:description" content="Next-gen emoji database with search, filtering, and more." />
+    <meta name="og:url" content="https://mojibase-v2.djstomp.repl.co" />
+    <meta name="og:image" content="https://i.imgur.com/XFM5zck.gif" />
+    <meta name="og:site_name" content="DJ's Mojibase" />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="https://mojibase-v2.djstomp.repl.co" />
+    <meta name="twitter:creator" content="DJ Stomp#2525" />
+    <meta name="twitter:description" content="Next-gen emoji database with search, filtering, and more." />
+    <meta name="twitter:image" content="https://i.imgur.com/XFM5zck.gif" />
+    <meta name="twitter:title" content="DJ's Mojibase v2" />
     <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/css/style.css"
-    />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
   </head>
   <body>
     <div id="backdrop"></div>
-    <div class="moji-options" id="moji-options">
-      <button id="writeclip" class="clip-btn">Copy to clipboard</button>
-      <button id="addclip" class="clip-btn">Add to clipboard</button>
-    </div>
-    <div class="search-container" style="overflow:hidden;border: 1px solid #00ee00;border-radius: 1vw;height: 7vw;right:0.75vw;width:auto;position:absolute; top: 0; left:0.75vw; padding: 0.5vw 1.5vw; margin:0.125vw 1vw;background-color:#22dd00;z-index:1000;opacity:0.8;">
-      <div style="height: 4.75vw; border-radius: 1vw; margin: 0.125vw; overflow:hidden;width: 96%;background-color: #22ff22;position:relative; left: 1vw; bottom: 0.25vw;top:0.25vw;padding-right: 3vw;display:flex;align-items:center;justify-content: center;"><div style="overflow:hidden; height: calc(4.25vw - 2px); width: calc(4.25vw - 2px); top: 0; left: 0.125vw; position: relative;margin:0.25vw; background-color: #55ff55;border: 1px solid #0d00; border-radius: 1vw; padding: 0.5vw;"><span style="width:4vw; height:4vw;"><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg enable-background="new 0 0 24 24" id="srch" style="fill: #0e0e;overflow:hidden;height:4vw;width:4vw;padding: 0.125vw;" version="1.0" viewBox="1 1 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g><path d="M9,4c2.8,0,5,2.2,5,5s-2.2,5-5,5s-5-2.2-5-5S6.2,4,9,4 M9,2C5.1,2,2,5.1,2,9c0,3.9,3.1,7,7,7s7-3.1,7-7C16,5.1,12.9,2,9,2    L9,2z"/></g></g><g><polygon points="22,20.3 20.3,22 14,15.7 14,14 15.7,14  "/></g></svg></span></div><textarea class="txt-search" name="txt-search" id="txt-search" style="background-color: #ffffff22; color: #000000dd; width:90%;height: 4vw; font-size: 3vw;font-family: sans-serif;resize:none;padding: 0.125vw; margin-left: 1vw; outline: 1px solid #ffffff66; border: 10px solid transarent;border-left: 15px solid transparent;box-sizing:border-box"></textarea> <div style="display: flex;flex-direction:column; width:5vw;align-items:center;justify-content:center;"><p style=" font-size:2vw;margin:0.5vw 0.25vw;color:black;position:relative; right: 0.125vw;">X</p></div></div>
+    <div class="search-container">
+      <div class="search-bar"><div class="search-deco"><span style="width:4vw; height:4vw;"><svg enable-background="new 0 0 24 24" id="srch" class="search-icon" version="1.0" viewBox="1 1 24 24"<g><g><path d="M9,4c2.8,0,5,2.2,5,5s-2.2,5-5,5s-5-2.2-5-5S6.2,4,9,4 M9,2C5.1,2,2,5.1,2,9c0,3.9,3.1,7,7,7s7-3.1,7-7C16,5.1,12.9,2,9,2    L9,2z"/></g></g><g><polygon points="22,20.3 20.3,22 14,15.7 14,14 15.7,14  "/></g></svg></span></div><textarea class="txt-search" name="txt-search" id="txt-search"></textarea> <div class="clear-search"><p class="clear-x">X</p></div></div>
       
     </div>
-    <div class="grid" style="margin-top:8vw">
+    <div class="grid">
       {{ griditems|safe }}
     </div>
     <div id="snackbar">Copied to clipboard!</div>
     <div id="wackbar">Unable to copy to clipboard!</div>
     <div id="ks" data-count="0" style="display:none;"></div>
     <script>
-      var $grid = $(".grid").isotope({
-        itemSelector: ".grid-item",
-        layoutMode: "masonry",
-        percentPosition: true,
-        columnWidth: ".grid-item",
-        sortBy: "random",
-        getSortData: {
-          name: '[data-name]',
-          id: '[data-id]'
-        }
-      });
-      // $grid.isotope("layout");
-      var $srch = $("#txt-search");
-      function pepeMode(){
-        $grid.isotope({filter: $(".grid-item[data-name*='pepe']")})
-      }
-      $srch.on(
-        "keyup", function (e) {
-          var qry = e.target.value.replace(" ", "_");
-          if (qry.length > 2){
-            var kscounter = document.getElementById('ks');
-            var kscount = parseInt(kscounter.getAttribute('data-count'))+1;
-            kscounter.setAttribute('data-count', `${kscount}`);
-            setTimeout(()=>{
-              if (parseInt(kscounter.getAttribute('data-count')) === kscount){
-                $grid.isotope({filter: $(`.grid-item[data-name*='${qry}']`)})
-              }
-            }, 500)
-              }
-        })
+      
       function writeClip(output) {
         try {
           console.log('Attempting to write to clipboard:', output)
-        navigator.clipboard.writeText(`${output}`)
-          // .then(
-        //   function () {
-        //     var sb = document.getElementById("snackbar");
-        //     sb.className = "show";
-        //     setTimeout(function () {
-        //       sb.className = sb.className.replace("show", "");
-        //     }, 3000);
-        //   },
-        //   function () {
-        //     var bs = document.getElementById("wackbar");
-        //     bs.className = "show";
-        //     setTimeout(function () {
-        //       bs.className = bs.className.replace("show", "");
-        //     }, 3000);
-        //   }
-        // );
+          navigator.clipboard.writeText(`${output}`)
         } catch (e) {console.log(e)}
       }
-      function addClip(output) {
+      async function addClip(output) {
         try {
-        navigator.clipboard.readText().then((clipText) => {
-          console.log(`${clipText} ${output}`)
-          navigator.clipboard.writeText(`${clipText} ${output}`)
-        })
+          var cliptext = await navigator.clipboard.readText()
+          console.log(`${cliptext} ${output}`)
+          navigator.clipboard.writeText(`${cliptext} ${output}`)
         } catch (e) {
           console.log(e)
         }
       }
-      $grid.on("click", ".grid-item", function () {
-        
-        var mojiOpts = document.getElementById('moji-options')
-          document.querySelector('body').appendChild(mojiOpts)
-        var $this = $(this);
-        var thisglyph = String.fromCharCode(parseInt($this.attr('id')))
-        var wclip = document.getElementById('writeclip')
-        var aclip = document.getElementById('addclip')
-        if (!$this.hasClass("gigante")) {
-          $(".gigante").toggleClass("gigante");
-          $this.toggleClass("gigante");
-          document.querySelector('.gigante').appendChild(mojiOpts)
-          wclip.addEventListener('click', function(event) {
-            writeClip(thisglyph);
-            $('#writeclip').toggleClass("btn-active")
-            setTimeout(()=>{
-              $('.btn-active').toggleClass("btn-active")
-            }, 3000)
-            event.stopPropagation()
-            // event.stopImmediatePropagation()
-          }, true)
-          aclip.addEventListener('click', function(event) {
-            addClip(thisglyph);
-            $('#addclip').toggleClass("btn-active")
-            setTimeout(()=>{
-              $('.btn-active').toggleClass("btn-active")
-            }, 3000)
-            event.stopPropagation()
-            //event.stopImmediatePropagation()
-          }, true)
-          // writeClip(thisglyph);
+      $grid = $('.grid').isotope({
+          itemSelector: ".grid-item",
+          layoutMode: "masonry",
+          percentPosition: true,
+          columnWidth: ".grid-item",
+          columnWidth: 60,
+          sortBy: "random",
+          hiddenStyle: {
+            opacity: 0
+          },
+          visibleStyle: {
+            opacity: 1
+          }
+      });
+      $grid.on('click', '.grid-item', function(e){
+        if (e.target.classList.contains('gigante')){
+          e.target.classList.remove('gigante')
+          $grid.isotope('layout')
+          return
         }
+        try {let mopts = document.getElementsByClassName('moji-options')[0]
+        mopts.remove()}catch{}
+        var $this = $(this);
+        var emojiId = e.target.getAttribute('data-id')
+        $(".gigante").toggleClass("gigante");
+        $this.toggleClass("gigante")
+        let mojopts = document.createElement('div')
+        let wbtn = document.createElement('button')
+        let abtn = document.createElement('button')
+        mojopts.classList.add("moji-options")
+        wbtn.classList.add('clip-btn')
+        abtn.classList.add('clip-btn')
+        wbtn.classList.add('wbtn')
+        abtn.classList.add('abtn')
+        abtn.innerText = "Copy Glyph"
+        wbtn.innerText = "Copy ID"
+        mojopts.append(wbtn)
+        mojopts.append(abtn)
+        document.getElementsByClassName('gigante')[0].append(mojopts)
+        document.getElementsByClassName('wbtn')[0].addEventListener('click', function(event) {
+            writeClip($('.gigante').attr('data-id'));
+            event.target.style.backgroundColor = "#00ff00"
+            event.stopPropagation()
+            event.stopImmediatePropagation()
+      }, true)
+        document.getElementsByClassName('abtn')[0].addEventListener('click', function(event) {
+            writeClip(String.fromCharCode($('.gigante').attr('data-id')));
+            event.target.style.backgroundColor = "#00ff00"
+            event.stopPropagation()
+            event.stopImmediatePropagation()
+          }, true)
         $grid.isotope()
       });
-      $grid.isotope('layout', {filter: {}})
+      var $srch = $("#txt-search");
+      $srch.on("keyup", function (e) {
+          // filterworker.postMessage(e.target.value, $grid, $)
+          $grid.isotope({filter: e.target.value.length > 0 ? $(`.grid-item[data-name*="${e.target.value.replace(/\s/gi, '_').replace('\n', '').toLowerCase()}"]`):''})
+      })
+      document.querySelector('.clear-search').addEventListener('click', function(event){
+        $('#txt-search').val('');
+        $grid.isotope({filter: '.grid-item'})
+        $grid.isotope('layout');
+      })
+      $grid.isotope('layout')
     </script>
+    <script src='/static/js/index.js'></script>
   </body>
 </html>
